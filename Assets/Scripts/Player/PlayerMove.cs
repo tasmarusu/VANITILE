@@ -99,6 +99,7 @@ public class PlayerMove : MonoBehaviour
             if (playerState == PlayerState.Jump && playerStatePrevious == PlayerState.Wall) return;
             playerStatePrevious = playerState;
             playerState = PlayerState.Jump;
+            //playerComponent.playerAnimation.SetTriggerParameter(PlayerAnimation.ParameterNames.kick);
         }
     }
 
@@ -182,7 +183,9 @@ public class PlayerMove : MonoBehaviour
             {
                 playerStatePrevious = playerState;
                 playerState = PlayerState.Wait;
+                playerComponent.playerAnimation.SetBoolParameter(PlayerAnimation.ParameterNames.run, false);
             }
+
 
             moveValue = 0.0f;   // 移動させないように
             return;
@@ -194,6 +197,7 @@ public class PlayerMove : MonoBehaviour
             {
                 playerStatePrevious = playerState;
                 playerState = PlayerState.Run;
+                playerComponent.playerAnimation.SetBoolParameter(PlayerAnimation.ParameterNames.run, true);
             }
 
 
@@ -299,6 +303,7 @@ public class PlayerMove : MonoBehaviour
         playerGravity = jumpPower;
         playerStatePrevious = playerState;
         playerState = PlayerState.Jump;
+      
 
         touchingDownAndSideNum = 2;
     }
@@ -333,6 +338,8 @@ public class PlayerMove : MonoBehaviour
 
         playerStatePrevious = playerState;
         playerState = PlayerState.Jump;
+        playerComponent.playerAnimation.SetTriggerParameter(PlayerAnimation.ParameterNames.kick);
+        playerComponent.playerAnimation.SetBoolParameter(PlayerAnimation.ParameterNames.wall, false);
 
         return true;
     }
@@ -349,12 +356,20 @@ public class PlayerMove : MonoBehaviour
                          true :         
                          playerComponent.groundTouchComponnet.isTouch;         // 地面と接している時の判定も確認する
 
+        playerComponent.playerAnimation.SetBoolParameter(PlayerAnimation.ParameterNames.ground, isGroundTouch);
+
+
         // 今地面に初めて着いた
         if (isGroundTouch && !isGroundTouch1fAgo) FirstOnGroundTouch();
 
 
-        if (isGroundTouch) return;
+        if (isGroundTouch)
+        {
+            playerComponent.playerAnimation.SetBoolParameter(PlayerAnimation.ParameterNames.wall, false);
+            return;
+        }
 
+        
 
         float addGravityValue, maxGravityValue;
 
@@ -399,7 +414,6 @@ public class PlayerMove : MonoBehaviour
         bool isGroundTouch = playerComponent.groundTouchComponnet.isTouch;
         if (isWallTouch == true && isGroundTouch == true)
         {
-            Debug.Log("下と左右が接触中");
             if (touchingDownAndSideNum == 0) touchingDownAndSideNum = 1;
             else if (touchingDownAndSideNum == 2) touchingDownAndSideNum = 1;
 
@@ -418,6 +432,7 @@ public class PlayerMove : MonoBehaviour
 
         touchingDownAndSideNum = 0;
         playerComponent.wallTouchComponent.SetActive(true);
+
     }
 
 
@@ -431,6 +446,7 @@ public class PlayerMove : MonoBehaviour
         jumpWallXPower = 0.0f;
         playerStatePrevious = playerState;
         playerState = PlayerState.Wall;
+        playerComponent.playerAnimation.SetBoolParameter(PlayerAnimation.ParameterNames.wall, true);
     }
 
 

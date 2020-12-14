@@ -133,6 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 46439983}
   - component: {fileID: 46439982}
+  - component: {fileID: 46439984}
+  - component: {fileID: 46439985}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -205,6 +207,37 @@ Transform:
   m_Father: {fileID: 1793610105}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &46439984
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46439981}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 093d1997b07bb7d428049d558ff2f4e8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &46439985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46439981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f977ba13530168249ad684f0805f70f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &61265329
 GameObject:
   m_ObjectHideFlags: 0
@@ -6679,6 +6712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25102c1a1d75d69418fb6791a2041ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpriteObj: {fileID: 46439981}
   wallTouchComponent: {fileID: 211669092}
   groundTouchComponnet: {fileID: 1126162645}
 --- !u!114 &1793610108
